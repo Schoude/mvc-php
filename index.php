@@ -18,9 +18,25 @@ $config = require('./config.php');
 
 $db = new Database($config['database']);
 
-// PDO::FETCH_ASSOC returns only the associative array values ('id' => 1, 'name' => 'Test')
-// and not the indexed ([0] => 1, [1] => 'Test') values
-$posts = $db->query('select * from posts')->fetchAll();
+if (array_key_exists('id', $_GET)) {
+  $id = $_GET['id'];
+
+  if (isset($id)) {
+    // Wildcard parameters that are replaced by the execute
+    // method on the prepared SQL stament. Two different ways.
+    // $query = 'select * from posts where id = ?';
+    $query = 'select * from posts where id = :id';
+    $posts = $db->query($query, [
+      // The three ways to define the wildcard replacement.
+      // $id,
+      // 'id' => $id,
+      ':id' => $id,
+    ])->fetchAll();
+  }
+} else {
+  $query = 'select * from posts';
+  $posts = $db->query($query)->fetchAll();
+}
 
 foreach ($posts as $post) {
   echo "<li>{$post['title']}</li>";
