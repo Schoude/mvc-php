@@ -19,7 +19,7 @@ function routeToController(string $path, array $routes)
   }
 }
 
-function abort(int $code = 404)
+function abort(int $code = Response::NOT_FOUND)
 {
   http_response_code($code);
 

@@ -11,5 +11,6 @@ require './functions.php';
  * The router depends on it!
  */
 require './Database.php';
+require './Response.php';
 
 require './router.php';
