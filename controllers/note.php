@@ -5,28 +5,19 @@
  * This is similar to 'export' in a JS module.
  */
 $config = require('./config.php');
-
 $db = new Database($config['database']);
 
+$currentUserId = 1;
+$heading = 'Note Detail';
 
 $note = $db->query(
   'select * from notes where id = :noteId',
   [
     ':noteId' => $_GET['id'],
   ]
-)->fetch();
+)->findOrFail();
 
-if (!$note) {
-  abort();
-}
 
-$currentUserId = 1;
-
-if ($note['user_id'] !== $currentUserId) {
-  // 403 = Forbidden
-  abort(Response::FORBIDDEN);
-}
-
-$heading = 'Note Detail';
+authorize($note['user_id'] === $currentUserId);
 
 require 'views/note.view.php';
