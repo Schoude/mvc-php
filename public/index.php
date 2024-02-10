@@ -4,7 +4,9 @@
  * This dumps the content of the
  * required file into this file
  */
-require './functions.php';
+require __DIR__ . '/../' . 'functions.php';
+
+dd('THIS IS INDEX!');
 
 /**
  * Has to be loaded first!
