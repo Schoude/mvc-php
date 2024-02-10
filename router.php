@@ -1,7 +1,7 @@
 <?php
 
 $path = parse_url($_SERVER['REQUEST_URI'])['path'];
-$routes = require('./routes.php');
+$routes = require(base_path('routes.php'));
 
 function routeToController(string $path, array $routes)
 {
@@ -16,7 +16,7 @@ function abort(int $code = Response::NOT_FOUND)
 {
   http_response_code($code);
 
-  require "./views/{$code}.php";
+  require base_path("views/{$code}.php");
 
   die();
 }

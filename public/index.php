@@ -1,18 +1,17 @@
 <?php
 
+const BASE_PATH = __DIR__ . '/../';
+
 /**
  * This dumps the content of the
  * required file into this file
  */
-require __DIR__ . '/../' . 'functions.php';
-
-dd('THIS IS INDEX!');
+require BASE_PATH . 'functions.php';
 
 /**
  * Has to be loaded first!
  * The router depends on it!
  */
-require './Database.php';
-require './Response.php';
-
-require './router.php';
+require base_path('Database.php');
+require base_path('Response.php');
+require base_path('router.php');
