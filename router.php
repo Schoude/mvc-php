@@ -16,7 +16,7 @@ function abort(int $code = Response::NOT_FOUND)
 {
   http_response_code($code);
 
-  require base_path("views/{$code}.php");
+  require view("{$code}.php");
 
   die();
 }
