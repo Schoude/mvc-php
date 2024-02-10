@@ -25,7 +25,14 @@ function base_path(string $path): string
   return BASE_PATH . $path;
 }
 
-function view(string $view): string
+/**
+ * Loads a view with the given attributes.
+ */
+function view(string $view, array $attributes = [])
 {
-  return base_path("views/{$view}");
+  // Import variables into the current symbol table from an array.
+  // => makes values declared in an assoc array available as variables
+  extract($attributes);
+
+  require base_path("views/{$view}");
 }
