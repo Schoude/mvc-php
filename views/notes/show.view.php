@@ -8,6 +8,7 @@
     <p class="mt-8"><?= htmlspecialchars($note['body']) ?></p>
 
     <form method="POST" class="mt-4">
+      <input type="hidden" name="_method" value="DELETE">
       <input type="hidden" name="id" value="<?= $note['id'] ?>">
       <button class="text-sm text-red-300 bg-gray-700 rounded-md px-3 py-2">Delete</button>
     </form>

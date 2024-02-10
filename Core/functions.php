@@ -15,6 +15,15 @@ function urlIs(string $value): bool
   return $_SERVER['REQUEST_URI'] === $value;
 }
 
+function abort(int $code = Response::NOT_FOUND)
+{
+  http_response_code($code);
+
+  view("{$code}.php");
+
+  die();
+}
+
 function authorize(bool $isAuthorized, int $statusCode = Response::FORBIDDEN)
 {
   if (!$isAuthorized) {
