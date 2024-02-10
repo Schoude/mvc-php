@@ -6,7 +6,7 @@ const BASE_PATH = __DIR__ . '/../';
  * This dumps the content of the
  * required file into this file
  */
-require BASE_PATH . 'functions.php';
+require BASE_PATH . 'Core/functions.php';
 
 /**
  * Class instantiations trigger the registered callback.
@@ -17,4 +17,4 @@ spl_autoload_register(function ($class) {
   require base_path("Core/{$class}.php");
 });
 
-require base_path('router.php');
+require base_path('Core/router.php');
