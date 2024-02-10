@@ -9,9 +9,12 @@ const BASE_PATH = __DIR__ . '/../';
 require BASE_PATH . 'functions.php';
 
 /**
- * Has to be loaded first!
- * The router depends on it!
+ * Class instantiations trigger the registered callback.
+ * Also calls to static methods or class constants trigger the registered callback.
+ * Then we can required the called class on the fly.
  */
-require base_path('Database.php');
-require base_path('Response.php');
+spl_autoload_register(function ($class) {
+  require base_path("Core/{$class}.php");
+});
+
 require base_path('router.php');
