@@ -1,13 +1,9 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
-/**
- * require() as a function saves the value returned from * a php file.
- * This is similar to 'import' in a JS module.
- */
-$config = require(base_path('config.php'));
-$db = new Database($config['database']);
+$db = App::resolve(Database::class);
 
 $currentUserId = 1;
 
