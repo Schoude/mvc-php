@@ -1,5 +1,7 @@
 <?php
 
+use Core\Database;
+
 /**
  * require() as a function saves the value returned from * a php file.
  * This is similar to 'export' in a JS module.

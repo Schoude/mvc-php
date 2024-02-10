@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function dd(mixed $var)
 {
   echo '<pre>';

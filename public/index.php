@@ -12,9 +12,14 @@ require BASE_PATH . 'Core/functions.php';
  * Class instantiations trigger the registered callback.
  * Also calls to static methods or class constants trigger the registered callback.
  * Then we can required the called class on the fly.
+ *
+ * The '$class' argument is the fully qualified class name with all the namespaces.
+ * => Folder structure MUST map the namespacing including case sensitivity.
  */
 spl_autoload_register(function ($class) {
-  require base_path("Core/{$class}.php");
+  // Might turn 'Core\Database' into 'Core/Database' (Mac & Linux).
+  $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+  require base_path("{$class}.php");
 });
 
 require base_path('Core/router.php');
