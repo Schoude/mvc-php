@@ -33,26 +33,24 @@ $user = $db->query('select * from users where email = :email', [
   ':email' => $email,
 ])->find();
 
-if (!$user) {
-  return view('sessions/create.view.php', [
-    'errors' => [
-      'email' => 'No matching account found for this email address.'
-    ],
-  ]);
+if ($user) {
+  // Email is correct
+
+  // 2) Compare the passwords
+  if (password_verify($password, $user['password'])) {
+    // Password is correct, so login the user and redirect to home.
+    login([
+      'email' => $email
+    ]);
+
+    header('Location: /');
+    die();
+  }
 }
 
-// 2) Compare the passwords
-if (!password_verify($password, $user['password'])) {
-  return view('sessions/create.view.php', [
-    'errors' => [
-      'email' => 'No matching account found for this email address and password.'
-    ],
-  ]);
-}
-
-login([
-  'email' => $email
+// Email and/or password are incorrect.
+return view('sessions/create.view.php', [
+  'errors' => [
+    'email' => 'No matching account found for this email address and password.'
+  ],
 ]);
-
-header('Location: /');
-die();
