@@ -52,10 +52,9 @@ $db->query(
 )->find();
 
 // mark that the user has logged in (i.e. started a session)
-// $_SESSION['logged_in'] = true;
-$_SESSION['user'] = [
-  'email' => $email,
-];
+login([
+  'email' => $email
+]);
 
 //redirect to the home page '/'
 header('Location: /');

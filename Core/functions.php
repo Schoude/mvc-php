@@ -47,3 +47,10 @@ function view(string $view, array $attributes = [])
 
   require base_path("views/{$view}");
 }
+
+function login(array $user)
+{
+  $_SESSION['user'] = [
+    'email' => $user['email']
+  ];
+}
