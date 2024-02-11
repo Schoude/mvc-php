@@ -1,10 +1,10 @@
 <?php
 
-$heading = 'Home';
+$_SESSION['name'] = 'Marc';
 
 view(
   'index.view.php',
   [
-    'heading' => $heading,
+    'heading' => 'Home',
   ]
 );

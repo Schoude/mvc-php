@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Sets 'PHPSESSID' cookie in the browser and creates a file
+ * on the server thats stores information about the session
+ *
+ * This happens for laragon in this dir `F:\laragon\tmp`
+ *
+ * If a cookie is present, it loads the data from the existing session file.
+ */
+session_start();
+
 const BASE_PATH = __DIR__ . '/../';
 
 /**
