@@ -21,6 +21,11 @@ class LoginForm
     return empty($errors);
   }
 
+  public function error(string $field, string $message): void
+  {
+    $this->errors[$field] = $message;
+  }
+
   public function errors()
   {
     return $this->errors;

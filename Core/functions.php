@@ -47,3 +47,9 @@ function view(string $view, array $attributes = [])
 
   require base_path("views/{$view}");
 }
+
+function redirect(string $path)
+{
+  header("Location: $path");
+  die();
+}
