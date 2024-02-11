@@ -4,6 +4,10 @@ use Core\Router;
 use Core\Session;
 use Core\ValidationException;
 
+const BASE_PATH = __DIR__ . '/../';
+
+require BASE_PATH . 'vendor/autoload.php';
+
 /**
  * Sets 'PHPSESSID' cookie in the browser and creates a file
  * on the server thats stores information about the session
@@ -13,8 +17,6 @@ use Core\ValidationException;
  * If a cookie is present, it loads the data from the existing session file.
  */
 session_start();
-
-const BASE_PATH = __DIR__ . '/../';
 
 /**
  * This dumps the content of the
@@ -30,11 +32,11 @@ require BASE_PATH . 'Core/functions.php';
  * The '$class' argument is the fully qualified class name with all the namespaces.
  * => Folder structure MUST map the namespacing including case sensitivity.
  */
-spl_autoload_register(function ($class) {
-  // Might turn 'Core\Database' into 'Core/Database' (Mac & Linux).
-  $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-  require base_path("{$class}.php");
-});
+// spl_autoload_register(function ($class) {
+//   // Might turn 'Core\Database' into 'Core/Database' (Mac & Linux).
+//   $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+//   require base_path("{$class}.php");
+// });
 
 require base_path('bootstrap.php');
 

@@ -1,0 +1,10 @@
+{
+    "name": "marc/laracasts-beginner-php",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    },
+    "require": {}
+}
