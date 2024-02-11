@@ -61,7 +61,7 @@ class Router
         // Null checks are handled within the resolve method
         Middleware::resolve($route['middleware']);
 
-        return require base_path($route['controller']);
+        return require base_path("Http/controllers/{$route['controller']}");
       }
     }
   }
