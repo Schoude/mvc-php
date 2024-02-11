@@ -41,23 +41,6 @@ class Authenticator
 
   public function logout()
   {
-    // Clear the super global
-    $_SESSION = [];
-    // Destroy the session file on the server
-    session_destroy();
-
-    // Clear the brower cookie -> set the expiration.
-    $cookieParams = session_get_cookie_params();
-    setcookie(
-      'PHPSESSID',
-      "",
-      // Time in the past = instant expiration
-      time() - 3600,
-      $cookieParams['path'],
-      $cookieParams['domain'],
-      $cookieParams['secure'],
-      $cookieParams['httponly'],
-    );
+    Session::destroy();
   }
-
 }

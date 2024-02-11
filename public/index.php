@@ -8,6 +8,9 @@
  *
  * If a cookie is present, it loads the data from the existing session file.
  */
+
+use Core\Session;
+
 session_start();
 
 const BASE_PATH = __DIR__ . '/../';
@@ -42,3 +45,6 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
+
+// After navigation, delete the flash session data for that page.
+Session::unflash();
