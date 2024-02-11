@@ -47,35 +47,3 @@ function view(string $view, array $attributes = [])
 
   require base_path("views/{$view}");
 }
-
-function login(array $user)
-{
-  $_SESSION['user'] = [
-    'email' => $user['email']
-  ];
-
-  // Create as new session id.
-  // Any leaked session ids get invalidated.
-  session_regenerate_id(true);
-}
-
-function logout()
-{
-  // Clear the super global
-  $_SESSION = [];
-  // Destroy the session file on the server
-  session_destroy();
-
-  // Clear the brower cookie -> set the expiration.
-  $cookieParams = session_get_cookie_params();
-  setcookie(
-    'PHPSESSID',
-    "",
-    // Time in the past = instant expiration
-    time() - 3600,
-    $cookieParams['path'],
-    $cookieParams['domain'],
-    $cookieParams['secure'],
-    $cookieParams['httponly'],
-  );
-}
