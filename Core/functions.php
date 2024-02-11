@@ -1,6 +1,7 @@
 <?php
 
 use Core\Response;
+use Core\Session;
 
 function dd(mixed $var)
 {
@@ -52,4 +53,9 @@ function redirect(string $path)
 {
   header("Location: $path");
   die();
+}
+
+function old(string $key, mixed $default = ''): mixed
+{
+  return Session::get('old')[$key] ?? $default;
 }
