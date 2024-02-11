@@ -1,5 +1,9 @@
 <?php
 
+use Core\Router;
+use Core\Session;
+use Core\ValidationException;
+
 /**
  * Sets 'PHPSESSID' cookie in the browser and creates a file
  * on the server thats stores information about the session
@@ -8,9 +12,6 @@
  *
  * If a cookie is present, it loads the data from the existing session file.
  */
-
-use Core\Session;
-
 session_start();
 
 const BASE_PATH = __DIR__ . '/../';
@@ -37,14 +38,20 @@ spl_autoload_register(function ($class) {
 
 require base_path('bootstrap.php');
 
-$router = new \Core\Router();
+$router = new Router();
 
 $routes = require(base_path('routes.php'));
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+try {
+  $router->route($uri, $method);
+} catch (ValidationException $e) {
+  Session::flash('errors', $e->errors);
+  Session::flash('old', $e->old);
 
-$router->route($uri, $method);
+  return redirect($router->previousUrl());
+}
 
 // After navigation, delete the flash session data for that page.
 Session::unflash();
