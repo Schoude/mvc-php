@@ -6,5 +6,15 @@
             "Http\\": "Http/"
         }
     },
-    "require": {}
+    "require": {
+        "illuminate/collections": "^10.43"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.33"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }
