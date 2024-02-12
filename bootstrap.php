@@ -11,3 +11,14 @@ App::bind('Core\Database', function () {
 
   return new Database($config['database']);
 });
+
+$loader = new \Twig\Loader\FilesystemLoader(base_path('/views/twig'));
+$twig = new \Twig\Environment($loader, [
+  'cache' => base_path('/views/twig/cache'),
+  'auto_reload' => true,
+]);
+
+
+App::bind('twig', function () use ($twig) {
+  return $twig;
+});
