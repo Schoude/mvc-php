@@ -15,7 +15,7 @@ class CredentialsForm
       $this->errors['email'] = 'Please provide a valid email address.';
     }
 
-    if (!Validator::string($this->attributes['password'])) {
+    if (!Validator::string($this->attributes['password'], 3, 255)) {
       $this->errors['password'] = 'Please provide a valid password.';
     }
   }
