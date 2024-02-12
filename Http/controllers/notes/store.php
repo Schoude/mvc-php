@@ -1,24 +1,18 @@
 <?php
 
-use Core\App;
-use Core\Database;
-use Core\Session;
-use Core\Validator;
 use Http\Forms\NoteForm;
+use Http\Models\Note;
 
 $form = NoteForm::validate($attributes = [
   'body' => $_POST['body']
 ]);
 
-// Add Note class
-$currentUserId = Session::get('user')['id'];
+$note = (new Note($attributes['body']))->save();
 
-$db = App::resolve(Database::class);
+if (!$note) {
+  $form
+    ->error('note', 'Could not create note.')
+    ->throw();
+}
 
-$db->query('INSERT INTO notes (body, user_id) VALUES (:body, :userId)', [
-  ':body' => $attributes['body'],
-  ':userId' => $currentUserId,
-]);
-
-header('Location: /notes');
-die();
+redirect('/notes');
