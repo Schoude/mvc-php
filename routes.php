@@ -2,6 +2,7 @@
 
 $router->get('/', 'index.php');
 $router->get('/t', 'twig.php');
+$router->get('/t/register', 'twig-register.php');
 $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
 

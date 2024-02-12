@@ -15,7 +15,7 @@
             {% set otherPage = 'text-gray-300 hover:bg-gray-700 hover:text-white' %}
 
             <a
-              href="/"
+              href="/t"
               {% if currentUrl == '/' %}
                 class="{{baseClasses ~ ' ' ~ currentPage}}"
               {% else %}
@@ -24,7 +24,7 @@
             >Home</a>
 
             <a
-              href="/about"
+              href="/t/about"
               {% if currentUrl == '/about' %}
                 class="{{baseClasses ~ ' ' ~ currentPage}}"
               {% else %}
@@ -33,7 +33,7 @@
             >About us</a>
 
             {% if loggedin %}
-              <a href="/notes"
+              <a href="/t/notes"
               {% if currentUrl == '/notes' %}
                 class="{{baseClasses ~ ' ' ~ currentPage}}"
               {% else %}
@@ -42,7 +42,7 @@
             >Notes</a>
             {% endif %}
 
-            <a href="/contact"
+            <a href="/t/contact"
               {% if currentUrl == '/contact' %}
                 class="{{baseClasses ~ ' ' ~ currentPage}}"
               {% else %}
@@ -85,8 +85,8 @@
                   Out</button>
               </form>
             {% else %}
-              <a href="/register" class="text-gray-300">Register</a>
-              <a href="/login" class="text-gray-300">Login</a>
+              <a href="/t/register" class="text-gray-300">Register</a>
+              <a href="/t/login" class="text-gray-300">Login</a>
             {% endif %}
           </div>
         </div>
