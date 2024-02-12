@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 use Core\Validator;
 
 $db = App::resolve(Database::class);
@@ -20,9 +21,11 @@ if (!empty($errors)) {
   ]);
 }
 
+$currentUserId = Session::get('user')['id'];
+
 $db->query('INSERT INTO notes (body, user_id) VALUES (:body, :userId)', [
   ':body' => $_POST['body'],
-  ':userId' => 1,
+  ':userId' => $currentUserId,
 ]);
 
 header('Location: /notes');

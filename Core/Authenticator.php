@@ -18,6 +18,7 @@ class Authenticator
       if (password_verify($password, $user['password'])) {
         // Password is correct, so login the user and redirect to home.
         $this->login([
+          'id' => $user['id'],
           'email' => $email
         ]);
 
@@ -30,9 +31,10 @@ class Authenticator
 
   public function login(array $user)
   {
-    $_SESSION['user'] = [
+    Session::put('user', [
+      'id' => $user['id'],
       'email' => $user['email']
-    ];
+    ]);
 
     // Create as new session id.
     // Any leaked session ids get invalidated.
@@ -42,5 +44,10 @@ class Authenticator
   public function logout()
   {
     Session::destroy();
+  }
+
+  public function user()
+  {
+    Session::get('user');
   }
 }

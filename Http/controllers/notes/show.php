@@ -2,10 +2,11 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
+$currentUserId = Session::get('user')['id'];
 
 $note = $db->query(
   'select * from notes where id = :noteId',

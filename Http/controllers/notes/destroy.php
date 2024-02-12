@@ -2,10 +2,11 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
+$currentUserId = Session::get('user')['id'];
 
 // First check if the user owns the note.
 $note = $db->query(

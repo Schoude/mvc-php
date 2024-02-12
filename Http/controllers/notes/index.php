@@ -2,9 +2,14 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
+
+$currentUserId = Session::get('user')['id'];
 
 $db = App::resolve(Database::class);
-$notes = $db->query('select * from notes where user_id = 1')->get();
+$notes = $db->query('select * from notes where user_id = :userId', [
+  ':userId' => $currentUserId,
+])->get();
 
 $heading = 'My Notes';
 
