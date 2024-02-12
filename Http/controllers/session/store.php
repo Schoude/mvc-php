@@ -1,9 +1,9 @@
 <?php
 
 use Core\Authenticator;
-use Http\Forms\LoginForm;
+use Http\Forms\CredentialsForm;
 
-$form = LoginForm::validate($attributes = [
+$form = CredentialsForm::validate($attributes = [
   'email' => $_POST['email'],
   'password' => $_POST['password'],
 ]);
