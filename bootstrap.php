@@ -18,7 +18,4 @@ $twig = new \Twig\Environment($loader, [
   'auto_reload' => true,
 ]);
 
-
-App::bind('twig', function () use ($twig) {
-  return $twig;
-});
+App::bind('twig', fn() => $twig);
