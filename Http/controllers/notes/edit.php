@@ -20,5 +20,5 @@ authorize($note['user_id'] === $currentUserId);
 view('notes/edit.view.php', [
   'heading' => 'Edit Note',
   'note' => $note,
-  'errors' => [],
+  'errors' => Session::get('errors') ?? [],
 ]);

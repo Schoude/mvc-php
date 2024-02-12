@@ -14,13 +14,17 @@
             <div class="col-span-full">
               <label for="body" class="block text-sm font-medium leading-6 text-gray-900">Body</label>
               <div class="mt-2">
-                <textarea id="body" name="body" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Write your note's text here."><?= $note['body'] ?? '' ?></textarea>
+                <textarea id="body" name="body" rows="3"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Write your note's text here."><?= $note['body'] ?? '' ?></textarea>
               </div>
 
               <!-- Error Display -->
-              <?php if (isset($errors['body'])) : ?>
+              <?php if (isset($errors['body'])): ?>
                 <div class="mt-2">
-                  <p class="text-red-400 font-bold text-xs"><?= $errors['body'] ?></p>
+                  <p class="text-red-400 font-bold text-xs">
+                    <?= $errors['body'] ?>
+                  </p>
                 </div>
               <?php endif ?>
             </div>
@@ -36,8 +40,10 @@
         <button form="form-destroy" class="text-sm text-red-300 bg-gray-700 rounded-md px-3 py-2">Delete</button>
       </form>
 
-      <a href="/note?id=<?= $note['id'] ?>" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</a>
-      <button form="form-update" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
+      <a href="/note?id=<?= $note['id'] ?>"
+        class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cancel</a>
+      <button form="form-update"
+        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
     </div>
   </div>
 </main>
