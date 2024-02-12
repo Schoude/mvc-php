@@ -4,6 +4,37 @@ namespace Core;
 
 class Authenticator
 {
+  public function attemptRegister(string $email, string $password): bool
+  {
+    /** @var Database $db */
+    $db = App::resolve(Database::class);
+
+    $foundUser = $db->query(
+      'select * from users where email = :email',
+      [
+        ':email' => $email,
+      ]
+    )->find();
+
+    if ($foundUser) {
+      return false;
+    }
+
+    $db->query(
+      'insert into users (email, password) values (:email, :password)',
+      [
+        ':email' => $email,
+        ':password' => password_hash($password, PASSWORD_BCRYPT),
+      ]
+    )->find();
+
+    $this->login([
+      'email' => $email
+    ]);
+
+    return true;
+  }
+
   public function attempt(string $email, string $password): bool
   {
     /** @var Database $db */
@@ -13,10 +44,8 @@ class Authenticator
       ':email' => $email,
     ])->find();
 
-    if ($user) { // Email is correct
-      // 2) Compare the passwords
+    if ($user) {
       if (password_verify($password, $user['password'])) {
-        // Password is correct, so login the user and redirect to home.
         $this->login([
           'id' => $user['id'],
           'email' => $email
@@ -36,8 +65,6 @@ class Authenticator
       'email' => $user['email']
     ]);
 
-    // Create as new session id.
-    // Any leaked session ids get invalidated.
     session_regenerate_id(true);
   }
 
