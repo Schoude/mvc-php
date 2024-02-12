@@ -86,4 +86,15 @@ class Note
 
     return true;
   }
+
+  public static function update(string $noteId, string $body)
+  {
+    /** @var Database $db */
+    $db = App::resolve(Database::class);
+
+    $db->query('update notes set body = :body where id = :noteId', [
+      ':noteId' => $noteId,
+      ':body' => $body,
+    ]);
+  }
 }

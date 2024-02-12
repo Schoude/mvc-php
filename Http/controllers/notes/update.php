@@ -23,12 +23,6 @@ $form = NoteForm::validate($attributes = [
 ]);
 
 // NO errors = update record
-$db->query('update notes set body = :body where id = :noteId', [
-  ':body' => $_POST['body'],
-  ':noteId' => $_POST['id'],
-]);
+Note::update($note['id'], $attributes['body']);
 
-// Redirect to the notes overview
-header('Location: /notes');
-
-die();
+redirect('/notes');
