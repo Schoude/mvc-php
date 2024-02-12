@@ -1,7 +1,7 @@
 <?php
 
-// $router->get('/', 'index.php');
-$router->get('/', 'twig.php');
+$router->get('/', 'index.php');
+$router->get('/t', 'twig.php');
 $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
 

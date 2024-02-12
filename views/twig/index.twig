@@ -1,5 +1,16 @@
 {% extends 'layouts/base.twig' %}
 
+{% block title %}
+  {{title}}
+{% endblock title %}
+
 {% block content %}
   {% include 'partials/nav.twig' %}
+  {% include 'partials/banner.twig' %}
+
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <p>Hello, {{userEmail}}!</p>
+    </div>
+  </main>
 {% endblock %}

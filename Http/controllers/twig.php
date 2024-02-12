@@ -8,7 +8,12 @@ $twig = App::resolve('twig');
 
 $template = $twig->load('index.twig');
 
+$user = Session::get('user');
+
 echo $template->render([
+  'title' => 'Home',
   'currentUrl' => $_SERVER['REQUEST_URI'],
-  'loggedIn' => Session::get('user') ?? false,
+  'heading' => 'Home',
+  'loggedIn' => $user ?? false,
+  'userEmail' => $user['email'] ?? 'Guest',
 ]);
