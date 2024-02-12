@@ -27,6 +27,18 @@ class Note
     return $this;
   }
 
+  public static function allWithRelation(string $userId): array
+  {
+    /** @var Database $db */
+    $db = App::resolve(Database::class);
+
+    $notes = $db->query('select * from notes where user_id = :userId', [
+      ':userId' => $userId,
+    ])->get();
+
+    return $notes;
+  }
+
   public static function get(string $noteId): array
   {
     /** @var Database $db */

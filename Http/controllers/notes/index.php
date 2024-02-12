@@ -3,13 +3,12 @@
 use Core\App;
 use Core\Database;
 use Core\Session;
+use Http\Models\Note;
 
 $currentUserId = Session::get('user')['id'];
 
 $db = App::resolve(Database::class);
-$notes = $db->query('select * from notes where user_id = :userId', [
-  ':userId' => $currentUserId,
-])->get();
+$notes = Note::allWithRelation($currentUserId);
 
 $heading = 'My Notes';
 
