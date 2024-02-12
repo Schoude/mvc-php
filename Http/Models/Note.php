@@ -27,16 +27,11 @@ class Note
     return $this;
   }
 
-  public static function delete(string $noteId): bool
+  public static function get(string $noteId): array
   {
-
-    $currentUserId = Session::get('user')['id'];
-
     /** @var Database $db */
     $db = App::resolve(Database::class);
 
-    // TODO: move to get() function
-    // First check if the user owns the note.
     $note = $db->query(
       'select * from notes where id = :noteId',
       [
@@ -45,11 +40,42 @@ class Note
     )->find();
 
     if (!$note) {
+      throw new \Exception('Note does not exist.');
+    }
+
+    return $note;
+  }
+
+  public static function getWithRelation(string $noteId, string $userId): array|bool
+  {
+    /** @var Database $db */
+    $db = App::resolve(Database::class);
+
+    $note = $db->query(
+      'select * from notes where id = :noteId and user_id = :userId',
+      [
+        ':noteId' => $noteId,
+        ':userId' => $userId,
+      ]
+    )->find();
+
+    if (!$note) {
       return false;
     }
-    // until here
 
-    if ($note['user_id'] !== $currentUserId) {
+    return $note;
+  }
+
+  public static function delete(string $noteId): bool
+  {
+    $currentUserId = Session::get('user')['id'];
+
+    /** @var Database $db */
+    $db = App::resolve(Database::class);
+
+    $note = static::getWithRelation($noteId, $currentUserId);
+
+    if (!$note) {
       return false;
     }
 

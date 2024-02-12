@@ -1,21 +1,16 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Response;
 use Core\Session;
-
-$db = App::resolve(Database::class);
+use Http\Models\Note;
 
 $currentUserId = Session::get('user')['id'];
 
-$note = $db->query(
-  'select * from notes where id = :noteId',
-  [
-    ':noteId' => $_GET['id'],
-  ]
-)->findOrFail();
+$note = Note::getWithRelation($_GET['id'], $currentUserId);
 
-authorize($note['user_id'] === $currentUserId);
+if (!$note) {
+  abort(Response::NOT_FOUND);
+}
 
 view('notes/edit.view.php', [
   'heading' => 'Edit Note',
