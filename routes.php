@@ -12,6 +12,7 @@ $router->get('/t/notes', 'twig-notes-index.php')->only('auth');
 // Note
 // View routes
 $router->get('/note', 'notes/show.php')->only('auth');
+$router->get('/t/note', 'twig-notes-show.php')->only('auth');
 $router->get('/note/create', 'notes/create.php')->only('auth');
 $router->get('/note/edit', 'notes/edit.php')->only('auth');
 // Interaction routes
