@@ -15,6 +15,10 @@
 					<li>
 						<a href="/note?id={{note.id}}" class="text-blue-800 hover:underline">{{note.body|e}}</a>
 					</li>
+				{% else %}
+					<li>
+						<em>No Notes found</em>
+					</li>
 				{% endfor %}
 			</ul>
 
