@@ -8,6 +8,7 @@ $router->get('/contact', 'contact.php');
 
 // Notes
 $router->get('/notes', 'notes/index.php')->only('auth');
+$router->get('/t/notes', 'twig-notes-index.php')->only('auth');
 // Note
 // View routes
 $router->get('/note', 'notes/show.php')->only('auth');
